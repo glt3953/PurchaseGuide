@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D857289FFF2863162FFCC00E /* libPods-PurchaseGuide.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7CD02FB19B54132DA23453 /* libPods-PurchaseGuide.a */; };
 		F36AB78D20EB14C00060C729 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB78C20EB14C00060C729 /* AppDelegate.m */; };
 		F36AB79020EB14C00060C729 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB78F20EB14C00060C729 /* ViewController.m */; };
 		F36AB79320EB14C00060C729 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F36AB79120EB14C00060C729 /* Main.storyboard */; };
@@ -15,6 +16,16 @@
 		F36AB79B20EB14C00060C729 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB79A20EB14C00060C729 /* main.m */; };
 		F36AB7A520EB14C10060C729 /* PurchaseGuideTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB7A420EB14C10060C729 /* PurchaseGuideTests.m */; };
 		F36AB7B020EB14C10060C729 /* PurchaseGuideUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB7AF20EB14C10060C729 /* PurchaseGuideUITests.m */; };
+		F36AB7C320EB18420060C729 /* UIColor+NingXia.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB7C020EB18410060C729 /* UIColor+NingXia.m */; };
+		F36AB7C420EB18420060C729 /* UIImage+NingXia.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB7C220EB18410060C729 /* UIImage+NingXia.m */; };
+		F36AB7CA20EB204D0060C729 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F36AB7C820EB204C0060C729 /* icon@2x.png */; };
+		F36AB7CB20EB204D0060C729 /* icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F36AB7C920EB204C0060C729 /* icon@3x.png */; };
+		F36AB7D020EB21CF0060C729 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB7CE20EB21CF0060C729 /* RadioButton.m */; };
+		F36AB7D120EB21CF0060C729 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F36AB7CF20EB21CF0060C729 /* README.md */; };
+		F36AB7D720EB29450060C729 /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F36AB7D320EB29450060C729 /* checked@2x.png */; };
+		F36AB7D820EB29450060C729 /* checked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F36AB7D420EB29450060C729 /* checked@3x.png */; };
+		F36AB7D920EB29450060C729 /* unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F36AB7D520EB29450060C729 /* unchecked@2x.png */; };
+		F36AB7DA20EB29450060C729 /* unchecked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F36AB7D620EB29450060C729 /* unchecked@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7F5FCF711FAA7E9255635080 /* Pods-PurchaseGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PurchaseGuide.release.xcconfig"; path = "Pods/Target Support Files/Pods-PurchaseGuide/Pods-PurchaseGuide.release.xcconfig"; sourceTree = "<group>"; };
+		CE8097B82ED4356F35B0C556 /* Pods-PurchaseGuide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PurchaseGuide.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PurchaseGuide/Pods-PurchaseGuide.debug.xcconfig"; sourceTree = "<group>"; };
+		EE7CD02FB19B54132DA23453 /* libPods-PurchaseGuide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PurchaseGuide.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F36AB78820EB14C00060C729 /* PurchaseGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PurchaseGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F36AB78B20EB14C00060C729 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F36AB78C20EB14C00060C729 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -51,6 +65,19 @@
 		F36AB7AB20EB14C10060C729 /* PurchaseGuideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PurchaseGuideUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F36AB7AF20EB14C10060C729 /* PurchaseGuideUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurchaseGuideUITests.m; sourceTree = "<group>"; };
 		F36AB7B120EB14C10060C729 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F36AB7BF20EB18410060C729 /* UIColor+NingXia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+NingXia.h"; sourceTree = "<group>"; };
+		F36AB7C020EB18410060C729 /* UIColor+NingXia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+NingXia.m"; sourceTree = "<group>"; };
+		F36AB7C120EB18410060C729 /* UIImage+NingXia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+NingXia.h"; sourceTree = "<group>"; };
+		F36AB7C220EB18410060C729 /* UIImage+NingXia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+NingXia.m"; sourceTree = "<group>"; };
+		F36AB7C820EB204C0060C729 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		F36AB7C920EB204C0060C729 /* icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@3x.png"; sourceTree = "<group>"; };
+		F36AB7CD20EB21CF0060C729 /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
+		F36AB7CE20EB21CF0060C729 /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
+		F36AB7CF20EB21CF0060C729 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F36AB7D320EB29450060C729 /* checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked@2x.png"; sourceTree = "<group>"; };
+		F36AB7D420EB29450060C729 /* checked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked@3x.png"; sourceTree = "<group>"; };
+		F36AB7D520EB29450060C729 /* unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unchecked@2x.png"; sourceTree = "<group>"; };
+		F36AB7D620EB29450060C729 /* unchecked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unchecked@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D857289FFF2863162FFCC00E /* libPods-PurchaseGuide.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +106,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		775E465DB3473CD8DED3CB9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EE7CD02FB19B54132DA23453 /* libPods-PurchaseGuide.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B768F6D050FC4F238CBB0028 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CE8097B82ED4356F35B0C556 /* Pods-PurchaseGuide.debug.xcconfig */,
+				7F5FCF711FAA7E9255635080 /* Pods-PurchaseGuide.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F36AB77F20EB14BF0060C729 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +130,8 @@
 				F36AB7A320EB14C10060C729 /* PurchaseGuideTests */,
 				F36AB7AE20EB14C10060C729 /* PurchaseGuideUITests */,
 				F36AB78920EB14C00060C729 /* Products */,
+				B768F6D050FC4F238CBB0028 /* Pods */,
+				775E465DB3473CD8DED3CB9A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +148,10 @@
 		F36AB78A20EB14C00060C729 /* PurchaseGuide */ = {
 			isa = PBXGroup;
 			children = (
+				F36AB7D220EB29450060C729 /* radio-res-ios */,
+				F36AB7C820EB204C0060C729 /* icon@2x.png */,
+				F36AB7C920EB204C0060C729 /* icon@3x.png */,
+				F36AB7BD20EB18410060C729 /* View */,
 				F36AB78B20EB14C00060C729 /* AppDelegate.h */,
 				F36AB78C20EB14C00060C729 /* AppDelegate.m */,
 				F36AB78E20EB14C00060C729 /* ViewController.h */,
@@ -132,6 +183,47 @@
 			path = PurchaseGuideUITests;
 			sourceTree = "<group>";
 		};
+		F36AB7BD20EB18410060C729 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F36AB7CC20EB21CF0060C729 /* RadioButton */,
+				F36AB7BE20EB18410060C729 /* CategoryUI */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F36AB7BE20EB18410060C729 /* CategoryUI */ = {
+			isa = PBXGroup;
+			children = (
+				F36AB7BF20EB18410060C729 /* UIColor+NingXia.h */,
+				F36AB7C020EB18410060C729 /* UIColor+NingXia.m */,
+				F36AB7C120EB18410060C729 /* UIImage+NingXia.h */,
+				F36AB7C220EB18410060C729 /* UIImage+NingXia.m */,
+			);
+			path = CategoryUI;
+			sourceTree = "<group>";
+		};
+		F36AB7CC20EB21CF0060C729 /* RadioButton */ = {
+			isa = PBXGroup;
+			children = (
+				F36AB7CD20EB21CF0060C729 /* RadioButton.h */,
+				F36AB7CE20EB21CF0060C729 /* RadioButton.m */,
+				F36AB7CF20EB21CF0060C729 /* README.md */,
+			);
+			path = RadioButton;
+			sourceTree = "<group>";
+		};
+		F36AB7D220EB29450060C729 /* radio-res-ios */ = {
+			isa = PBXGroup;
+			children = (
+				F36AB7D320EB29450060C729 /* checked@2x.png */,
+				F36AB7D420EB29450060C729 /* checked@3x.png */,
+				F36AB7D520EB29450060C729 /* unchecked@2x.png */,
+				F36AB7D620EB29450060C729 /* unchecked@3x.png */,
+			);
+			path = "radio-res-ios";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,9 +231,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F36AB7B420EB14C10060C729 /* Build configuration list for PBXNativeTarget "PurchaseGuide" */;
 			buildPhases = (
+				8738F5A42D9734B6F3986660 /* [CP] Check Pods Manifest.lock */,
 				F36AB78420EB14C00060C729 /* Sources */,
 				F36AB78520EB14C00060C729 /* Frameworks */,
 				F36AB78620EB14C00060C729 /* Resources */,
+				39C929FE034184EF4E7B9487 /* [CP] Embed Pods Frameworks */,
+				02F4C08CD480B374F1ABCDEF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -238,8 +333,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F36AB7D120EB21CF0060C729 /* README.md in Resources */,
 				F36AB79820EB14C00060C729 /* LaunchScreen.storyboard in Resources */,
+				F36AB7DA20EB29450060C729 /* unchecked@3x.png in Resources */,
+				F36AB7CA20EB204D0060C729 /* icon@2x.png in Resources */,
+				F36AB7D920EB29450060C729 /* unchecked@2x.png in Resources */,
+				F36AB7D820EB29450060C729 /* checked@3x.png in Resources */,
+				F36AB7CB20EB204D0060C729 /* icon@3x.png in Resources */,
 				F36AB79520EB14C00060C729 /* Assets.xcassets in Resources */,
+				F36AB7D720EB29450060C729 /* checked@2x.png in Resources */,
 				F36AB79320EB14C00060C729 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,14 +362,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		02F4C08CD480B374F1ABCDEF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PurchaseGuide/Pods-PurchaseGuide-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		39C929FE034184EF4E7B9487 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PurchaseGuide/Pods-PurchaseGuide-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8738F5A42D9734B6F3986660 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PurchaseGuide-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F36AB78420EB14C00060C729 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F36AB79020EB14C00060C729 /* ViewController.m in Sources */,
+				F36AB7C420EB18420060C729 /* UIImage+NingXia.m in Sources */,
 				F36AB79B20EB14C00060C729 /* main.m in Sources */,
+				F36AB7C320EB18420060C729 /* UIColor+NingXia.m in Sources */,
 				F36AB78D20EB14C00060C729 /* AppDelegate.m in Sources */,
+				F36AB7D020EB21CF0060C729 /* RadioButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,10 +584,13 @@
 		};
 		F36AB7B520EB14C10060C729 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE8097B82ED4356F35B0C556 /* Pods-PurchaseGuide.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4394J75KCV;
 				INFOPLIST_FILE = PurchaseGuide/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ningxia.PurchaseGuide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -441,10 +600,13 @@
 		};
 		F36AB7B620EB14C10060C729 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F5FCF711FAA7E9255635080 /* Pods-PurchaseGuide.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4394J75KCV;
 				INFOPLIST_FILE = PurchaseGuide/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ningxia.PurchaseGuide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
