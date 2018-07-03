@@ -26,6 +26,11 @@
 @property (nonatomic, copy) NSNumber *extendCreditRatio; //贷款比例：20-65%
 @property (nonatomic, copy) NSArray *extendCreditPeriods; //贷款年限：1-25年
 @property (nonatomic, copy) NSNumber *extendCreditPeriod; //贷款比例：20-65%
+@property (nonatomic) double extendCreditAmount; //贷款额
+@property (nonatomic, strong) UITextField *extendCreditAmountTextField; //贷款额输入框
+@property (nonatomic) double netDownPayment; //净首付
+@property (nonatomic, strong) UITextField *netDownPaymentTextField; //净首付输入框
+@property (nonatomic, strong) UITextField *averageMonthlySupplyTextField; //平均月供输入框
 
 @end
 
@@ -37,7 +42,7 @@
     
     CGFloat originX = 20;
     CGFloat originY = 64;
-    CGFloat labelWidth = 100;
+    CGFloat labelWidth = 120;
     CGFloat labelHeight = 30;
     UILabel *finalPriceLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [finalPriceLabel setText:@"成交价："];
@@ -76,7 +81,7 @@
     originY += 10 + labelHeight;
     NSMutableArray *evaluationRatioButtons = [NSMutableArray arrayWithCapacity:2];
     btnRect = (CGRect){originX, originY, labelWidth, labelHeight};
-    _evaluationRatios = @[@{@"value":@0.95, @"name":@"95成"}, @{@"value":@0.93, @"name":@"93成"}];
+    _evaluationRatios = @[@{@"value":@0.93, @"name":@"93成"}, @{@"value":@0.95, @"name":@"95成"}];
     for (NSDictionary *evaluationRatio in _evaluationRatios) {
         RadioButton *btn = [[RadioButton alloc] initWithFrame:btnRect];
         [btn addTarget:self action:@selector(evaluationRatioButtonValueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -93,6 +98,7 @@
     }
     [evaluationRatioButtons[0] setGroupButtons:evaluationRatioButtons]; // Setting buttons into the group
     [evaluationRatioButtons[0] setSelected:YES]; // Making the first button initially selected
+    _evaluationRatio = _evaluationRatios[0][@"value"];
     
     originY += 10 + labelHeight;
     UILabel *netPriceLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
@@ -101,9 +107,8 @@
     [self.view addSubview:netPriceLabel];
     
     originX += labelWidth;
-    _netPrice = 279;
     _netPriceTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [_netPriceTextField setText:[NSString stringWithFormat:@"%.2f万", _netPrice]];
+    _netPriceTextField.enabled = NO;
     [_netPriceTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.view addSubview:_netPriceTextField];
     
@@ -126,8 +131,9 @@
     }
     _extendCreditPeriods = [extendCreditPeriods copy];
     originY += 10 + labelHeight;
+    CGFloat pickerViewHeight = 60;
     //初始化一个PickerView
-    _extendCreditPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, originY, CGRectGetWidth(self.view.bounds), 80)];
+    _extendCreditPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, originY, CGRectGetWidth(self.view.bounds), pickerViewHeight)];
     _extendCreditPickerView.tag = 1000;
     //指定Picker的代理
     _extendCreditPickerView.dataSource = self;
@@ -135,6 +141,58 @@
     //是否要显示选中的指示器(默认值是NO)
     _extendCreditPickerView.showsSelectionIndicator = NO;
     [self.view addSubview:_extendCreditPickerView];
+    _extendCreditRatio = _extendCreditRatios[0][@"value"];
+    
+    originY += 10 + pickerViewHeight;
+    UILabel *extendCreditAmountLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    [extendCreditAmountLabel setText:@"贷款额："];
+    [extendCreditAmountLabel setFont:[UIFont systemFontOfSize:20]];
+    [self.view addSubview:extendCreditAmountLabel];
+    
+    originX += labelWidth;
+    _extendCreditAmountTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _extendCreditAmountTextField.enabled = NO;
+    [_extendCreditAmountTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.view addSubview:_extendCreditAmountTextField];
+    
+    originX = 20;
+    originY += 10 + labelHeight;
+    UILabel *netDownPaymentLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    [netDownPaymentLabel setText:@"净首付："];
+    [netDownPaymentLabel setFont:[UIFont systemFontOfSize:20]];
+    [self.view addSubview:netDownPaymentLabel];
+    
+    originX += labelWidth;
+    _netDownPaymentTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _netDownPaymentTextField.enabled = NO;
+    [_netDownPaymentTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.view addSubview:_netDownPaymentTextField];
+    
+    originX = 20;
+    originY += 10 + labelHeight;
+    UILabel *averageMonthlySupplyLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    [averageMonthlySupplyLabel setText:@"平均月供："];
+    [averageMonthlySupplyLabel setFont:[UIFont systemFontOfSize:20]];
+    [self.view addSubview:averageMonthlySupplyLabel];
+    
+    originX += labelWidth;
+    _averageMonthlySupplyTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _averageMonthlySupplyTextField.enabled = NO;
+    [_averageMonthlySupplyTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.view addSubview:_averageMonthlySupplyTextField];
+    
+    [self refreshPriceInfo];
+}
+
+- (void)refreshPriceInfo {
+    _netPrice = _finalPrice * [_evaluationRatio doubleValue];
+    [_netPriceTextField setText:[NSString stringWithFormat:@"%.2f万", _netPrice]];
+    
+    _extendCreditAmount = _netPrice * [_extendCreditRatio doubleValue];
+    [_extendCreditAmountTextField setText:[NSString stringWithFormat:@"%.2f万", _extendCreditAmount]];
+    
+    _netDownPayment = _finalPrice - _extendCreditAmount;
+    [_netDownPaymentTextField setText:[NSString stringWithFormat:@"%.2f万", _netDownPayment]];
 }
 
 - (void)houseFeaturesRadioButtonValueChanged:(RadioButton *)sender {
