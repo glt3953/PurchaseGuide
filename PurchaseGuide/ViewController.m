@@ -106,6 +106,35 @@
     [_netPriceTextField setText:[NSString stringWithFormat:@"%.2f万", _netPrice]];
     [_netPriceTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.view addSubview:_netPriceTextField];
+    
+    originX = 20;
+    originY += 10 + labelHeight;
+    UILabel *extendCreditLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth * 2, labelHeight}];
+    [extendCreditLabel setText:@"贷款比例及年限："];
+    [extendCreditLabel setFont:[UIFont systemFontOfSize:20]];
+    [self.view addSubview:extendCreditLabel];
+    
+    NSMutableArray *extendCreditRatios = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 65; i > 15;) {
+        [extendCreditRatios addObject:@{@"value":[NSNumber numberWithDouble:i * 0.01], @"name":[NSString stringWithFormat:@"%lu%%", (unsigned long)i]}];
+        i -= 5;
+    }
+    _extendCreditRatios = [extendCreditRatios copy];
+    NSMutableArray *extendCreditPeriods = [[NSMutableArray alloc] init];
+    for (NSUInteger i = 25; i > 0; i--) {
+        [extendCreditPeriods addObject:@{@"value":[NSNumber numberWithUnsignedInteger:i], @"name":[NSString stringWithFormat:@"%lu年", (unsigned long)i]}];
+    }
+    _extendCreditPeriods = [extendCreditPeriods copy];
+    originY += 10 + labelHeight;
+    //初始化一个PickerView
+    _extendCreditPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, originY, CGRectGetWidth(self.view.bounds), 80)];
+    _extendCreditPickerView.tag = 1000;
+    //指定Picker的代理
+    _extendCreditPickerView.dataSource = self;
+    _extendCreditPickerView.delegate = self;
+    //是否要显示选中的指示器(默认值是NO)
+    _extendCreditPickerView.showsSelectionIndicator = NO;
+    [self.view addSubview:_extendCreditPickerView];
 }
 
 - (void)houseFeaturesRadioButtonValueChanged:(RadioButton *)sender {
@@ -158,8 +187,7 @@
 #pragma mark - UIPickerViewDelegate
 //设置组件的宽度
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-//    return pickerViewWidth;
-    return CGRectGetWidth(self.view.bounds);
+    return CGRectGetWidth(self.view.bounds) / 2;
 }
 
 //设置组件中每行的高度
