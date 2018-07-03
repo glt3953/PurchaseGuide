@@ -31,6 +31,14 @@
 @property (nonatomic) double netDownPayment; //净首付
 @property (nonatomic, strong) UITextField *netDownPaymentTextField; //净首付输入框
 @property (nonatomic, strong) UITextField *averageMonthlySupplyTextField; //平均月供输入框
+@property (nonatomic) double deedTax; //契税
+@property (nonatomic, strong) UITextField *deedTaxTextField; //契税输入框
+@property (nonatomic) double personalTax; //个税
+@property (nonatomic, strong) UITextField *personalTaxTextField; //个税输入框
+@property (nonatomic) double agencyFees; //中介费
+@property (nonatomic, strong) UITextField *agencyFeesTextField; //中介费输入框
+@property (nonatomic) double totalDownPayment; //总首付
+@property (nonatomic, strong) UITextField *totalDownPaymentTextField; //总首付输入框
 
 @end
 
@@ -181,18 +189,89 @@
     [_averageMonthlySupplyTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.view addSubview:_averageMonthlySupplyTextField];
     
+    originX = 20;
+    originY += 10 + labelHeight;
+    UILabel *deedTaxLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    [deedTaxLabel setText:@"契税："];
+    [deedTaxLabel setFont:[UIFont systemFontOfSize:20]];
+    [self.view addSubview:deedTaxLabel];
+    
+    originX += labelWidth;
+    _deedTaxTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _deedTaxTextField.enabled = NO;
+    [_deedTaxTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.view addSubview:_deedTaxTextField];
+    
+    originX = 20;
+    originY += 10 + labelHeight;
+    UILabel *personalTaxLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    [personalTaxLabel setText:@"个税："];
+    [personalTaxLabel setFont:[UIFont systemFontOfSize:20]];
+    [self.view addSubview:personalTaxLabel];
+    
+    originX += labelWidth;
+    _personalTaxTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    [_personalTaxTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    _personalTax = 4.3;
+    [_personalTaxTextField setText:[NSString stringWithFormat:@"%.2f万", _personalTax]];
+    [self.view addSubview:_personalTaxTextField];
+    
+    originX = 20;
+    originY += 10 + labelHeight;
+    UILabel *agencyFeesLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    [agencyFeesLabel setText:@"中介费："];
+    [agencyFeesLabel setFont:[UIFont systemFontOfSize:20]];
+    [self.view addSubview:agencyFeesLabel];
+    
+    originX += labelWidth;
+    _agencyFeesTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    [_agencyFeesTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.view addSubview:_agencyFeesTextField];
+    
+    originX = 20;
+    originY += 10 + labelHeight;
+    UILabel *totalDownPaymentLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    [totalDownPaymentLabel setText:@"总首付："];
+    [totalDownPaymentLabel setFont:[UIFont systemFontOfSize:20]];
+    [self.view addSubview:totalDownPaymentLabel];
+    
+    originX += labelWidth;
+    _totalDownPaymentTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _totalDownPaymentTextField.enabled = NO;
+    [_totalDownPaymentTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.view addSubview:_totalDownPaymentTextField];
+    
     [self refreshPriceInfo];
 }
 
 - (void)refreshPriceInfo {
-    _netPrice = _finalPrice * [_evaluationRatio doubleValue];
-    [_netPriceTextField setText:[NSString stringWithFormat:@"%.2f万", _netPrice]];
+    if ([_houseType unsignedIntegerValue] == 0) {
+        //满五年
+        _netPrice = _finalPrice * [_evaluationRatio doubleValue];
+        _extendCreditAmount = _netPrice * [_extendCreditRatio doubleValue];
+    } else {
+        _netPrice = 150;
+        _extendCreditAmount = _netPrice * 0.8;
+    }
     
-    _extendCreditAmount = _netPrice * [_extendCreditRatio doubleValue];
+    [_netPriceTextField setText:[NSString stringWithFormat:@"%.2f万", _netPrice]];
     [_extendCreditAmountTextField setText:[NSString stringWithFormat:@"%.2f万", _extendCreditAmount]];
     
     _netDownPayment = _finalPrice - _extendCreditAmount;
     [_netDownPaymentTextField setText:[NSString stringWithFormat:@"%.2f万", _netDownPayment]];
+    
+    _deedTax = _netPrice * 0.01;
+    [_deedTaxTextField setText:[NSString stringWithFormat:@"%.2f万", _deedTax]];
+    
+    _agencyFees = _finalPrice * 0.025;
+    [_agencyFeesTextField setText:[NSString stringWithFormat:@"%.2f万", _agencyFees]];
+    
+    _totalDownPayment = _netDownPayment + _deedTax + _agencyFees + 0.06;
+    if ([_houseType unsignedIntegerValue] == 1) {
+        //满两年
+        _totalDownPayment += _personalTax;
+    }
+    [_totalDownPaymentTextField setText:[NSString stringWithFormat:@"%.2f万", _totalDownPayment]];
 }
 
 - (void)houseFeaturesRadioButtonValueChanged:(RadioButton *)sender {
@@ -203,6 +282,8 @@
             NSArray *filteredArray = [_houseFeatures filteredArrayUsingPredicate:predicate];
             if (filteredArray.count > 0) {
                 _houseType = filteredArray[0][@"type"];
+                
+                [self refreshPriceInfo];
             }
         }
         
@@ -218,6 +299,8 @@
             NSArray *filteredArray = [_evaluationRatios filteredArrayUsingPredicate:predicate];
             if (filteredArray.count > 0) {
                 _evaluationRatio = filteredArray[0][@"value"];
+                
+                [self refreshPriceInfo];
             }
         }
         
@@ -271,6 +354,8 @@
     } else {
         _extendCreditPeriod = _extendCreditPeriods && _extendCreditPeriods.count > row ? _extendCreditPeriods[row][@"value"] : @0;
     }
+    
+    [self refreshPriceInfo];
     
     [pickerView reloadComponent:component];
 }
