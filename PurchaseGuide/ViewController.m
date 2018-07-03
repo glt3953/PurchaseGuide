@@ -9,9 +9,7 @@
 #import "ViewController.h"
 #import "RadioButton.h"
 
-//static float pickerViewWidth = [UIScreen mainScreen].bounds.size.width;
-
-@interface ViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface ViewController () <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic) double finalPrice; //成交价
 @property (nonatomic, strong) UITextField *finalPriceTextField; //成交价输入框
@@ -60,7 +58,9 @@
     originX += labelWidth;
     _finalPrice = 300;
     _finalPriceTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [_finalPriceTextField setText:[NSString stringWithFormat:@"%.2f万", _finalPrice]];
+    _finalPriceTextField.delegate = self;
+    _finalPriceTextField.keyboardType = UIKeyboardTypeDecimalPad;
+    [_finalPriceTextField setText:[NSString stringWithFormat:@"%.4f", _finalPrice]];
     [_finalPriceTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.view addSubview:_finalPriceTextField];
     
@@ -212,8 +212,10 @@
     originX += labelWidth;
     _personalTaxTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [_personalTaxTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    _personalTaxTextField.delegate = self;
+    _personalTaxTextField.keyboardType = UIKeyboardTypeDecimalPad;
     _personalTax = 4.3;
-    [_personalTaxTextField setText:[NSString stringWithFormat:@"%.2f万", _personalTax]];
+    [_personalTaxTextField setText:[NSString stringWithFormat:@"%.4f", _personalTax]];
     [self.view addSubview:_personalTaxTextField];
     
     originX = 20;
@@ -225,6 +227,8 @@
     
     originX += labelWidth;
     _agencyFeesTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _agencyFeesTextField.delegate = self;
+    _agencyFeesTextField.keyboardType = UIKeyboardTypeDecimalPad;
     [_agencyFeesTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.view addSubview:_agencyFeesTextField];
     
@@ -245,6 +249,7 @@
 }
 
 - (void)refreshPriceInfo {
+    _finalPrice = [_finalPriceTextField.text doubleValue];
     if ([_houseType unsignedIntegerValue] == 0) {
         //满五年
         _netPrice = _finalPrice * [_evaluationRatio doubleValue];
@@ -254,24 +259,25 @@
         _extendCreditAmount = _netPrice * 0.8;
     }
     
-    [_netPriceTextField setText:[NSString stringWithFormat:@"%.2f万", _netPrice]];
-    [_extendCreditAmountTextField setText:[NSString stringWithFormat:@"%.2f万", _extendCreditAmount]];
+    [_netPriceTextField setText:[NSString stringWithFormat:@"%.4f", _netPrice]];
+    [_extendCreditAmountTextField setText:[NSString stringWithFormat:@"%.4f", _extendCreditAmount]];
     
     _netDownPayment = _finalPrice - _extendCreditAmount;
-    [_netDownPaymentTextField setText:[NSString stringWithFormat:@"%.2f万", _netDownPayment]];
+    [_netDownPaymentTextField setText:[NSString stringWithFormat:@"%.4f", _netDownPayment]];
     
     _deedTax = _netPrice * 0.01;
-    [_deedTaxTextField setText:[NSString stringWithFormat:@"%.2f万", _deedTax]];
+    [_deedTaxTextField setText:[NSString stringWithFormat:@"%.4f", _deedTax]];
     
     _agencyFees = _finalPrice * 0.025;
-    [_agencyFeesTextField setText:[NSString stringWithFormat:@"%.2f万", _agencyFees]];
+    [_agencyFeesTextField setText:[NSString stringWithFormat:@"%.4f", _agencyFees]];
     
     _totalDownPayment = _netDownPayment + _deedTax + _agencyFees + 0.06;
     if ([_houseType unsignedIntegerValue] == 1) {
         //满两年
+        _personalTax = [_personalTaxTextField.text doubleValue];
         _totalDownPayment += _personalTax;
     }
-    [_totalDownPaymentTextField setText:[NSString stringWithFormat:@"%.2f万", _totalDownPayment]];
+    [_totalDownPaymentTextField setText:[NSString stringWithFormat:@"%.4f", _totalDownPayment]];
 }
 
 - (void)houseFeaturesRadioButtonValueChanged:(RadioButton *)sender {
@@ -306,6 +312,11 @@
         
         NSLog(@"Selected text: %@", sender.titleLabel.text);
     }
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self refreshPriceInfo];
 }
 
 #pragma mark - UIPickerViewDataSource
