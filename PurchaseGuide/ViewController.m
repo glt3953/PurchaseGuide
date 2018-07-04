@@ -11,6 +11,7 @@
 
 @interface ViewController () <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
+@property (nonatomic, strong) UIScrollView *displayArea;
 @property (nonatomic) double finalPrice; //成交价
 @property (nonatomic, strong) UITextField *finalPriceTextField; //成交价输入框
 @property (nonatomic, copy) NSArray *houseFeatures; //房屋特点：满五年（0）、满两年（1）
@@ -46,6 +47,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    [self registerForKeyboardNotifications];
+    
+    _displayArea = [[UIScrollView alloc] initWithFrame:self.view.frame];
+    [_displayArea setScrollEnabled:YES];
+    [self.view addSubview:_displayArea];
+    
     CGFloat originX = 20;
     CGFloat originY = 64;
     CGFloat labelWidth = 120;
@@ -53,7 +60,7 @@
     UILabel *finalPriceLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [finalPriceLabel setText:@"成交价："];
     [finalPriceLabel setFont:[UIFont systemFontOfSize:20]];
-    [self.view addSubview:finalPriceLabel];
+    [_displayArea addSubview:finalPriceLabel];
     
     originX += labelWidth;
     _finalPrice = 300;
@@ -62,7 +69,7 @@
     _finalPriceTextField.keyboardType = UIKeyboardTypeDecimalPad;
     [_finalPriceTextField setText:[NSString stringWithFormat:@"%.4f", _finalPrice]];
     [_finalPriceTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.view addSubview:_finalPriceTextField];
+    [_displayArea addSubview:_finalPriceTextField];
     
     originX = 20;
     originY += 10 + labelHeight;
@@ -80,7 +87,7 @@
         [btn setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         btn.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
-        [self.view addSubview:btn];
+        [_displayArea addSubview:btn];
         [buttons addObject:btn];
     }
     [buttons[0] setGroupButtons:buttons]; // Setting buttons into the group
@@ -101,7 +108,7 @@
         [btn setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         btn.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
-        [self.view addSubview:btn];
+        [_displayArea addSubview:btn];
         [evaluationRatioButtons addObject:btn];
     }
     [evaluationRatioButtons[0] setGroupButtons:evaluationRatioButtons]; // Setting buttons into the group
@@ -112,20 +119,20 @@
     UILabel *netPriceLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [netPriceLabel setText:@"网签价："];
     [netPriceLabel setFont:[UIFont systemFontOfSize:20]];
-    [self.view addSubview:netPriceLabel];
+    [_displayArea addSubview:netPriceLabel];
     
     originX += labelWidth;
     _netPriceTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     _netPriceTextField.enabled = NO;
     [_netPriceTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.view addSubview:_netPriceTextField];
+    [_displayArea addSubview:_netPriceTextField];
     
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *extendCreditLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth * 2, labelHeight}];
     [extendCreditLabel setText:@"贷款比例及年限："];
     [extendCreditLabel setFont:[UIFont systemFontOfSize:20]];
-    [self.view addSubview:extendCreditLabel];
+    [_displayArea addSubview:extendCreditLabel];
     
     NSMutableArray *extendCreditRatios = [[NSMutableArray alloc] init];
     for (NSUInteger i = 65; i > 15;) {
@@ -148,66 +155,66 @@
     _extendCreditPickerView.delegate = self;
     //是否要显示选中的指示器(默认值是NO)
     _extendCreditPickerView.showsSelectionIndicator = NO;
-    [self.view addSubview:_extendCreditPickerView];
+    [_displayArea addSubview:_extendCreditPickerView];
     _extendCreditRatio = _extendCreditRatios[0][@"value"];
     
     originY += 10 + pickerViewHeight;
     UILabel *extendCreditAmountLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [extendCreditAmountLabel setText:@"贷款额："];
     [extendCreditAmountLabel setFont:[UIFont systemFontOfSize:20]];
-    [self.view addSubview:extendCreditAmountLabel];
+    [_displayArea addSubview:extendCreditAmountLabel];
     
     originX += labelWidth;
     _extendCreditAmountTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     _extendCreditAmountTextField.enabled = NO;
     [_extendCreditAmountTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.view addSubview:_extendCreditAmountTextField];
+    [_displayArea addSubview:_extendCreditAmountTextField];
     
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *netDownPaymentLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [netDownPaymentLabel setText:@"净首付："];
     [netDownPaymentLabel setFont:[UIFont systemFontOfSize:20]];
-    [self.view addSubview:netDownPaymentLabel];
+    [_displayArea addSubview:netDownPaymentLabel];
     
     originX += labelWidth;
     _netDownPaymentTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     _netDownPaymentTextField.enabled = NO;
     [_netDownPaymentTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.view addSubview:_netDownPaymentTextField];
+    [_displayArea addSubview:_netDownPaymentTextField];
     
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *averageMonthlySupplyLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [averageMonthlySupplyLabel setText:@"平均月供："];
     [averageMonthlySupplyLabel setFont:[UIFont systemFontOfSize:20]];
-    [self.view addSubview:averageMonthlySupplyLabel];
+    [_displayArea addSubview:averageMonthlySupplyLabel];
     
     originX += labelWidth;
     _averageMonthlySupplyTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     _averageMonthlySupplyTextField.enabled = NO;
     [_averageMonthlySupplyTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.view addSubview:_averageMonthlySupplyTextField];
+    [_displayArea addSubview:_averageMonthlySupplyTextField];
     
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *deedTaxLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [deedTaxLabel setText:@"契税："];
     [deedTaxLabel setFont:[UIFont systemFontOfSize:20]];
-    [self.view addSubview:deedTaxLabel];
+    [_displayArea addSubview:deedTaxLabel];
     
     originX += labelWidth;
     _deedTaxTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     _deedTaxTextField.enabled = NO;
     [_deedTaxTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.view addSubview:_deedTaxTextField];
+    [_displayArea addSubview:_deedTaxTextField];
     
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *personalTaxLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [personalTaxLabel setText:@"个税："];
     [personalTaxLabel setFont:[UIFont systemFontOfSize:20]];
-    [self.view addSubview:personalTaxLabel];
+    [_displayArea addSubview:personalTaxLabel];
     
     originX += labelWidth;
     _personalTaxTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
@@ -216,34 +223,34 @@
     _personalTaxTextField.keyboardType = UIKeyboardTypeDecimalPad;
     _personalTax = 4.3;
     [_personalTaxTextField setText:[NSString stringWithFormat:@"%.4f", _personalTax]];
-    [self.view addSubview:_personalTaxTextField];
+    [_displayArea addSubview:_personalTaxTextField];
     
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *agencyFeesLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [agencyFeesLabel setText:@"中介费："];
     [agencyFeesLabel setFont:[UIFont systemFontOfSize:20]];
-    [self.view addSubview:agencyFeesLabel];
+    [_displayArea addSubview:agencyFeesLabel];
     
     originX += labelWidth;
     _agencyFeesTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     _agencyFeesTextField.delegate = self;
     _agencyFeesTextField.keyboardType = UIKeyboardTypeDecimalPad;
     [_agencyFeesTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.view addSubview:_agencyFeesTextField];
+    [_displayArea addSubview:_agencyFeesTextField];
     
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *totalDownPaymentLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     [totalDownPaymentLabel setText:@"总首付："];
     [totalDownPaymentLabel setFont:[UIFont systemFontOfSize:20]];
-    [self.view addSubview:totalDownPaymentLabel];
+    [_displayArea addSubview:totalDownPaymentLabel];
     
     originX += labelWidth;
     _totalDownPaymentTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
     _totalDownPaymentTextField.enabled = NO;
     [_totalDownPaymentTextField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.view addSubview:_totalDownPaymentTextField];
+    [_displayArea addSubview:_totalDownPaymentTextField];
     
     [self refreshPriceInfo];
 }
@@ -314,7 +321,40 @@
     }
 }
 
+#pragma mark - handle keyboard events
+- (void)registerForKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+    NSDictionary *info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.displayArea.contentInset = contentInsets;
+    self.displayArea.scrollIndicatorInsets = contentInsets;
+    
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    self.displayArea.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + kbSize.height);
+    [self.displayArea scrollRectToVisible:_totalDownPaymentTextField.frame animated:YES];
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.displayArea.contentInset = contentInsets;
+    self.displayArea.scrollIndicatorInsets = contentInsets;
+    self.displayArea.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
+    [self.displayArea scrollRectToVisible:_finalPriceTextField.frame animated:YES];
+}
+
 #pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    return YES;
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [self refreshPriceInfo];
 }
