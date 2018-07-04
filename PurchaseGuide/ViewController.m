@@ -326,11 +326,16 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
+    
+    // 自动隐藏键盘
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
 
-- (void)keyboardWasShown:(NSNotification*)aNotification {
+- (void)keyboardWasShown:(NSNotification *)aNotification {
     NSDictionary *info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    kbSize.height = 216;
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
     self.displayArea.contentInset = contentInsets;
@@ -342,12 +347,18 @@
     [self.displayArea scrollRectToVisible:_totalDownPaymentTextField.frame animated:YES];
 }
 
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+- (void)keyboardWillBeHidden:(NSNotification *)aNotification {
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.displayArea.contentInset = contentInsets;
     self.displayArea.scrollIndicatorInsets = contentInsets;
     self.displayArea.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
     [self.displayArea scrollRectToVisible:_finalPriceTextField.frame animated:YES];
+}
+
+- (void)dismissKeyboard {
+    [_finalPriceTextField resignFirstResponder];
+    [_personalTaxTextField resignFirstResponder];
+    [_agencyFeesTextField resignFirstResponder];
 }
 
 #pragma mark - UITextFieldDelegate
