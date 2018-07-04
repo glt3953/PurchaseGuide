@@ -34,6 +34,8 @@
 @property (nonatomic, strong) UITextField *deedTaxTextField; //契税输入框
 @property (nonatomic) double personalTax; //个税
 @property (nonatomic, strong) UITextField *personalTaxTextField; //个税输入框
+@property (nonatomic) double evaluateFees; //评估费
+@property (nonatomic, strong) UITextField *evaluateFeesTextField; //评估费输入框
 @property (nonatomic) double agencyFees; //中介费
 @property (nonatomic, strong) UITextField *agencyFeesTextField; //中介费输入框
 @property (nonatomic) double totalDownPayment; //总首付
@@ -54,17 +56,18 @@
     [self.view addSubview:_displayArea];
     
     CGFloat originX = 20;
-    CGFloat originY = 64;
-    CGFloat labelWidth = 120;
+    CGFloat originY = 20;
+    CGFloat labelWidth = 180;
     CGFloat labelHeight = 30;
     UILabel *finalPriceLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [finalPriceLabel setText:@"成交价："];
+    [finalPriceLabel setText:@"成交价（万）："];
     [finalPriceLabel setFont:[UIFont systemFontOfSize:20]];
     [_displayArea addSubview:finalPriceLabel];
     
     originX += labelWidth;
+    CGFloat textFieldWidth = 120;
     _finalPrice = 300;
-    _finalPriceTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _finalPriceTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, textFieldWidth, labelHeight}];
     _finalPriceTextField.delegate = self;
     _finalPriceTextField.keyboardType = UIKeyboardTypeDecimalPad;
     [_finalPriceTextField setText:[NSString stringWithFormat:@"%.4f", _finalPrice]];
@@ -117,12 +120,12 @@
     
     originY += 10 + labelHeight;
     UILabel *netPriceLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [netPriceLabel setText:@"网签价："];
+    [netPriceLabel setText:@"网签价（万）："];
     [netPriceLabel setFont:[UIFont systemFontOfSize:20]];
     [_displayArea addSubview:netPriceLabel];
     
     originX += labelWidth;
-    _netPriceTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _netPriceTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, textFieldWidth, labelHeight}];
     _netPriceTextField.enabled = NO;
     [_netPriceTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [_displayArea addSubview:_netPriceTextField];
@@ -160,12 +163,12 @@
     
     originY += 10 + pickerViewHeight;
     UILabel *extendCreditAmountLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [extendCreditAmountLabel setText:@"贷款额："];
+    [extendCreditAmountLabel setText:@"贷款额（万）："];
     [extendCreditAmountLabel setFont:[UIFont systemFontOfSize:20]];
     [_displayArea addSubview:extendCreditAmountLabel];
     
     originX += labelWidth;
-    _extendCreditAmountTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _extendCreditAmountTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, textFieldWidth, labelHeight}];
     _extendCreditAmountTextField.enabled = NO;
     [_extendCreditAmountTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [_displayArea addSubview:_extendCreditAmountTextField];
@@ -173,12 +176,12 @@
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *netDownPaymentLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [netDownPaymentLabel setText:@"净首付："];
+    [netDownPaymentLabel setText:@"净首付（万）："];
     [netDownPaymentLabel setFont:[UIFont systemFontOfSize:20]];
     [_displayArea addSubview:netDownPaymentLabel];
     
     originX += labelWidth;
-    _netDownPaymentTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _netDownPaymentTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, textFieldWidth, labelHeight}];
     _netDownPaymentTextField.enabled = NO;
     [_netDownPaymentTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [_displayArea addSubview:_netDownPaymentTextField];
@@ -186,12 +189,12 @@
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *averageMonthlySupplyLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [averageMonthlySupplyLabel setText:@"平均月供："];
+    [averageMonthlySupplyLabel setText:@"平均月供（万）："];
     [averageMonthlySupplyLabel setFont:[UIFont systemFontOfSize:20]];
     [_displayArea addSubview:averageMonthlySupplyLabel];
     
     originX += labelWidth;
-    _averageMonthlySupplyTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _averageMonthlySupplyTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, textFieldWidth, labelHeight}];
     _averageMonthlySupplyTextField.enabled = NO;
     [_averageMonthlySupplyTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [_displayArea addSubview:_averageMonthlySupplyTextField];
@@ -199,12 +202,12 @@
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *deedTaxLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [deedTaxLabel setText:@"契税："];
+    [deedTaxLabel setText:@"契税（万）："];
     [deedTaxLabel setFont:[UIFont systemFontOfSize:20]];
     [_displayArea addSubview:deedTaxLabel];
     
     originX += labelWidth;
-    _deedTaxTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _deedTaxTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, textFieldWidth, labelHeight}];
     _deedTaxTextField.enabled = NO;
     [_deedTaxTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [_displayArea addSubview:_deedTaxTextField];
@@ -212,12 +215,12 @@
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *personalTaxLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [personalTaxLabel setText:@"个税："];
+    [personalTaxLabel setText:@"个税（万）："];
     [personalTaxLabel setFont:[UIFont systemFontOfSize:20]];
     [_displayArea addSubview:personalTaxLabel];
     
     originX += labelWidth;
-    _personalTaxTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _personalTaxTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, textFieldWidth, labelHeight}];
     [_personalTaxTextField setBorderStyle:UITextBorderStyleRoundedRect];
     _personalTaxTextField.delegate = self;
     _personalTaxTextField.keyboardType = UIKeyboardTypeDecimalPad;
@@ -227,13 +230,29 @@
     
     originX = 20;
     originY += 10 + labelHeight;
+    UILabel *evaluateFeesLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    [evaluateFeesLabel setText:@"评估费（万）："];
+    [evaluateFeesLabel setFont:[UIFont systemFontOfSize:20]];
+    [_displayArea addSubview:evaluateFeesLabel];
+    
+    originX += labelWidth;
+    _evaluateFees = 0.06;
+    _evaluateFeesTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, textFieldWidth, labelHeight}];
+    _evaluateFeesTextField.delegate = self;
+    _evaluateFeesTextField.keyboardType = UIKeyboardTypeDecimalPad;
+    [_evaluateFeesTextField setText:[NSString stringWithFormat:@"%.4f", _evaluateFees]];
+    [_evaluateFeesTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [_displayArea addSubview:_evaluateFeesTextField];
+    
+    originX = 20;
+    originY += 10 + labelHeight;
     UILabel *agencyFeesLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [agencyFeesLabel setText:@"中介费："];
+    [agencyFeesLabel setText:@"中介费（万）："];
     [agencyFeesLabel setFont:[UIFont systemFontOfSize:20]];
     [_displayArea addSubview:agencyFeesLabel];
     
     originX += labelWidth;
-    _agencyFeesTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _agencyFeesTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, textFieldWidth, labelHeight}];
     _agencyFeesTextField.delegate = self;
     _agencyFeesTextField.keyboardType = UIKeyboardTypeDecimalPad;
     [_agencyFeesTextField setBorderStyle:UITextBorderStyleRoundedRect];
@@ -242,12 +261,12 @@
     originX = 20;
     originY += 10 + labelHeight;
     UILabel *totalDownPaymentLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
-    [totalDownPaymentLabel setText:@"总首付："];
+    [totalDownPaymentLabel setText:@"总首付（万）："];
     [totalDownPaymentLabel setFont:[UIFont systemFontOfSize:20]];
     [_displayArea addSubview:totalDownPaymentLabel];
     
     originX += labelWidth;
-    _totalDownPaymentTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
+    _totalDownPaymentTextField = [[UITextField alloc] initWithFrame:(CGRect){originX, originY, textFieldWidth, labelHeight}];
     _totalDownPaymentTextField.enabled = NO;
     [_totalDownPaymentTextField setBorderStyle:UITextBorderStyleRoundedRect];
     [_displayArea addSubview:_totalDownPaymentTextField];
@@ -278,7 +297,7 @@
     _agencyFees = _finalPrice * 0.025;
     [_agencyFeesTextField setText:[NSString stringWithFormat:@"%.4f", _agencyFees]];
     
-    _totalDownPayment = _netDownPayment + _deedTax + _agencyFees + 0.06;
+    _totalDownPayment = _netDownPayment + _deedTax + _agencyFees + _evaluateFees;
     if ([_houseType unsignedIntegerValue] == 1) {
         //满两年
         _personalTax = [_personalTaxTextField.text doubleValue];
@@ -333,6 +352,10 @@
 }
 
 - (void)keyboardWasShown:(NSNotification *)aNotification {
+    if ([_finalPriceTextField isFirstResponder]) {
+        return;
+    }
+    
     NSDictionary *info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     kbSize.height = 216;
@@ -358,6 +381,7 @@
 - (void)dismissKeyboard {
     [_finalPriceTextField resignFirstResponder];
     [_personalTaxTextField resignFirstResponder];
+    [_evaluateFeesTextField resignFirstResponder];
     [_agencyFeesTextField resignFirstResponder];
 }
 
