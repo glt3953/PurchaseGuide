@@ -51,12 +51,14 @@
     
     [self registerForKeyboardNotifications];
     
+    CGRect frame = self.view.frame;
+    frame.size.height -= 100;
     _displayArea = [[UIScrollView alloc] initWithFrame:self.view.frame];
     [_displayArea setScrollEnabled:YES];
     [self.view addSubview:_displayArea];
     
     CGFloat originX = 20;
-    CGFloat originY = 20;
+    CGFloat originY = 20 + 64;
     CGFloat labelWidth = 180;
     CGFloat labelHeight = 30;
     UILabel *finalPriceLabel = [[UILabel alloc] initWithFrame:(CGRect){originX, originY, labelWidth, labelHeight}];
