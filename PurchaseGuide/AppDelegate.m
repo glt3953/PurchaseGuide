@@ -20,6 +20,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+//    id __weak obj = [[NSObject alloc] init]; //编译报错：Assigning retained object to weak variable; object will be released after assignment
+//    id __strong obj0 = [[NSObject alloc] init]; //自己生成并持有对象
+//    id __weak obj1 = obj0; //因为obj0变量为强引用，所以自己持有对象，这样obj1变量持有生成对象的弱引用
+    id __weak obj1 = nil;
+    {
+        id __strong obj0 = [[NSObject alloc] init]; //自己生成并持有对象
+        obj1 = obj0; //因为obj0变量为强引用，所以自己持有对象，obj1变量持有对象的弱引用
+        NSLog(@"A: %@", obj1); //输出obj1变量持有的弱引用的对象
+    } //因为obj0变量超出其作用域，强引用失效，所以自动释放自己持有的对象。因为该对象无持有者，所以废弃该对象，废弃对象的同时，持有该对象弱引用的obj1变量的弱引用失效，nil赋值给obj1。
+    NSLog(@"B: %@", obj1); //输出赋值给obj1变量中的nil
+    
 //    HttpServerViewController *defaultViewController = [[HttpServerViewController alloc] init];
     ViewController *defaultViewController = [[ViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:defaultViewController];
