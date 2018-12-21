@@ -14,13 +14,86 @@ int *arg = NULL;
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) NSMutableArray *items; // 顺序队列
+@property (nonatomic) NSUInteger numItems; // 队列长度
+@property (nonatomic) NSUInteger head; // head 表示队头下标
+@property (nonatomic) NSUInteger tail; // tail 表示队尾下标
+
 @end
 
 @implementation AppDelegate
 
+int cal(int n) {
+    //2(9),3(36),4(100),5(225)
+    int sum = 0;
+    int i = 1;
+    int j = 1;
+    for (; i <= n; ++i) {
+        j = 1;
+        for (; j <= n; ++j) {
+            sum = sum +  i * j;
+        }
+    }
+    
+    return sum;
+}
+
+void func() {
+    int i = 0;
+    int arr[4] = {0};
+    for(; i <= 5; i++){
+        arr[i] = 0;
+        printf("hello world\n");
+    }
+}
+
+- (void)initItems:(NSUInteger)capacity {
+    _items = [[NSMutableArray alloc] initWithCapacity:capacity];
+    _numItems = capacity;
+    _head = 0;
+    _tail = 0;
+}
+
+- (BOOL)enqueue:(NSString *)item {
+    if (_tail == _numItems) {
+        // 表示队列已经满了
+        return NO;
+    }
+    
+    _items[_tail] = item;
+    ++_tail;
+    
+    return YES;
+}
+
+- (NSString *)dequeue {
+    if (_head == _tail) {
+        // 表示队列为空
+        return NULL;
+    }
+    
+    NSString *ret = _items[_head];
+    ++_head;
+    
+    return ret;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSUInteger capacity = 6;
+    [self initItems:capacity];
+    for (NSUInteger i = 0; i < capacity; i++) {
+        [self enqueue:[NSString stringWithFormat:@"%lu", (unsigned long)i]];
+        
+        if (i % 2 == 0) {
+            NSString *item = [self dequeue];
+            NSLog(@"item:%@", item);
+        }
+    }
+    
+//    func();
+//    cal(5);
     
 //    id __unsafe_unretained obj = [[NSObject alloc] init]; //编译报错（同weak修饰符）：Assigning retained object to unsafe_unretained variable; object will be released after assignment
 //    id __strong obj0 = [[NSObject alloc] init]; //自己生成并持有对象
@@ -57,11 +130,11 @@ int *arg = NULL;
     
     
     fun();
-//    int i = 10;
+//    int i = 10;`
 //    arg = &i;
     NSLog(@"第一次：*arg = %d", *arg);
     NSLog(@"第二次：*arg = %d", *arg); //arg已经成为悬垂指针
-    
+
 //    HttpServerViewController *defaultViewController = [[HttpServerViewController alloc] init];
     ViewController *defaultViewController = [[ViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:defaultViewController];
