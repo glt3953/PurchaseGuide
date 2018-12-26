@@ -57,6 +57,20 @@ void func() {
 - (BOOL)enqueue:(NSString *)item {
     if (_tail == _numItems) {
         // 表示队列已经满了
+        if (_head == 0) {
+            // 表示整个队列都占满了
+            return NO;
+        }
+        
+        //数据搬移
+        for (NSUInteger i = _head; i < _tail; ++i) {
+            _items[i-_head] = _items[i];
+        }
+        
+        // 搬移完之后更新head和tail
+        _tail -= _head;
+        _head -= 0;
+        
         return NO;
     }
     
@@ -78,8 +92,54 @@ void func() {
     return ret;
 }
 
+- (void)bubbleSort {
+    NSMutableArray *sourceArray = [@[@3, @5, @4, @1, @2, @6] mutableCopy];
+    NSUInteger n = sourceArray.count;
+    
+    for (NSUInteger i = 0; i < n; i++) {
+        BOOL endFlag = NO; // 提前退出冒泡循环的标志位
+        for (NSUInteger j = 0; j < n - i - 1; j++) {
+            if (sourceArray[j] > sourceArray[j+1]) {
+                // 交换
+                NSNumber *tmp = sourceArray[j];
+                sourceArray[j] = sourceArray[j+1];
+                sourceArray[j+1] = tmp;
+                endFlag = YES; // 表示有数据交换
+            }
+        }
+        
+        if (!endFlag) {
+            // 没有数据交换，提前退出
+            break;
+        }
+    }
+}
+
+- (void)insertionSort {
+    NSMutableArray *sourceArray = [@[@3, @5, @4, @1, @2, @6] mutableCopy];
+    NSUInteger n = sourceArray.count;
+    
+    for (NSUInteger i = 1; i < n; i++) {
+        NSNumber *value = sourceArray[i];
+        NSUInteger j = i - 1;
+
+        for (; j >= 0; j--) {
+            if (sourceArray[j] > value) {
+                // 数据移动
+                sourceArray[j+1] = sourceArray[j];
+            } else {
+                break;
+            }
+        }
+        
+        sourceArray[j+1] = value; // 插入数据
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self bubbleSort];
     
     NSUInteger capacity = 6;
     [self initItems:capacity];
