@@ -39,7 +39,7 @@
 		0A27461721996E8700D4875C /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A27460B21996E8700D4875C /* DDAbstractDatabaseLogger.m */; };
 		0A27461821996E8700D4875C /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A27460C21996E8700D4875C /* DDFileLogger.m */; };
 		D857289FFF2863162FFCC00E /* libPods-PurchaseGuide.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7CD02FB19B54132DA23453 /* libPods-PurchaseGuide.a */; };
-		F36AB78D20EB14C00060C729 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB78C20EB14C00060C729 /* AppDelegate.m */; };
+		F36AB78D20EB14C00060C729 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F36AB78C20EB14C00060C729 /* AppDelegate.mm */; };
 		F36AB79020EB14C00060C729 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB78F20EB14C00060C729 /* ViewController.m */; };
 		F36AB79320EB14C00060C729 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F36AB79120EB14C00060C729 /* Main.storyboard */; };
 		F36AB79520EB14C00060C729 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F36AB79420EB14C00060C729 /* Assets.xcassets */; };
@@ -142,7 +142,7 @@
 		EE7CD02FB19B54132DA23453 /* libPods-PurchaseGuide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PurchaseGuide.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F36AB78820EB14C00060C729 /* PurchaseGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PurchaseGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F36AB78B20EB14C00060C729 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		F36AB78C20EB14C00060C729 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F36AB78C20EB14C00060C729 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		F36AB78E20EB14C00060C729 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F36AB78F20EB14C00060C729 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F36AB79220EB14C00060C729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -368,7 +368,7 @@
 				F36AB7C920EB204C0060C729 /* icon@3x.png */,
 				F36AB7BD20EB18410060C729 /* View */,
 				F36AB78B20EB14C00060C729 /* AppDelegate.h */,
-				F36AB78C20EB14C00060C729 /* AppDelegate.m */,
+				F36AB78C20EB14C00060C729 /* AppDelegate.mm */,
 				F36AB78E20EB14C00060C729 /* ViewController.h */,
 				F36AB78F20EB14C00060C729 /* ViewController.m */,
 				F36AB79120EB14C00060C729 /* Main.storyboard */,
@@ -623,7 +623,7 @@
 				0A27461221996E8700D4875C /* ContextFilterLogFormatter.m in Sources */,
 				0A27461021996E8700D4875C /* DDTTYLogger.m in Sources */,
 				0A2745F721996E0A00D4875C /* HttpServerViewController.m in Sources */,
-				F36AB78D20EB14C00060C729 /* AppDelegate.m in Sources */,
+				F36AB78D20EB14C00060C729 /* AppDelegate.mm in Sources */,
 				0A27460E21996E8700D4875C /* GCDAsyncSocket.m in Sources */,
 				0A27461521996E8700D4875C /* DDLog.m in Sources */,
 				F36AB7D020EB21CF0060C729 /* RadioButton.m in Sources */,

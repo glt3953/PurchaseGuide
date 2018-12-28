@@ -151,8 +151,54 @@ void func() {
     return [self approximateSquareRootByNum:num min:min max:max];
 }
 
+// 计数排序，a 是数组，n 是数组大小。假设数组中存储的都是非负整数。
+void countingSort(int a[], int n) {
+    if (n <= 1) return;
+    
+    // 查找数组中数据的范围
+    int max = a[0];
+    for (int i = 1; i < n; ++i) {
+        if (max < a[i]) {
+            max = a[i];
+        }
+    }
+    
+    int *c = new int[max + 1]; // 申请一个计数数组 c，下标大小 [0,max]
+    for (int i = 0; i <= max; ++i) {
+        c[i] = 0;
+    }
+    
+    // 计算每个元素的个数，放入 c 中
+    for (int i = 0; i < n; ++i) {
+        c[a[i]]++;
+    }
+    
+    // 依次累加
+    for (int i = 1; i <= max; ++i) {
+        c[i] = c[i-1] + c[i];
+    }
+    
+    // 临时数组 r，存储排序之后的结果
+    int *r = new int[n];
+    // 计算排序的关键步骤，有点难理解
+    for (int i = n - 1; i >= 0; --i) {
+        int index = c[a[i]]-1;
+        r[index] = a[i];
+        c[a[i]]--;
+    }
+    
+    // 将结果拷贝给 a 数组
+    for (int i = 0; i < n; ++i) {
+        a[i] = r[i];
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    int n = 8;
+    int a[8] = {2, 5, 3, 0, 2, 3, 0, 3};
+    countingSort(a, n);
     
     CGFloat num = 13;
     CGFloat min = 1;
@@ -206,8 +252,6 @@ void func() {
                             * style if not commented */
     }
     
-    
-    fun();
 //    int i = 10;`
 //    arg = &i;
     NSLog(@"第一次：*arg = %d", *arg);
@@ -229,24 +273,6 @@ void safefree(void **pp)
         free(*pp);                  /* deallocate chunk, note that free(NULL) is valid */
         *pp = NULL;                 /* reset original pointer */
     }
-}
-
-void fun()
-{
-    int i = 10;
-    arg = &i;
-    char *p = NULL, *p2;
-    p = (char *)malloc(1000);    /* get a chunk */
-    p2 = p;              /* copy the pointer */
-    NSLog(@"p2: %s", p2);
-    /* use the chunk here */
-    safefree(&p);       /* safety freeing; does not affect p2 variable */
-    NSLog(@"p2: %s", p2);
-    safefree(&p);       /* this second call won't fail */
-    NSLog(@"p2: %s", p2);
-    char c = *p2;       /* p2 is still a dangling pointer, so this is undefined behavior. */
-    NSLog(@"p2: %s", p2);
-    NSLog(@"c: %c", c);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
