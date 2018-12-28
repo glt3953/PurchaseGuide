@@ -96,9 +96,9 @@ void func() {
     NSMutableArray *sourceArray = [@[@3, @5, @4, @1, @2, @6] mutableCopy];
     NSUInteger n = sourceArray.count;
     
-    for (NSUInteger i = 0; i < n; i++) {
+    for (NSUInteger i = 0; i < n; ++i) {
         BOOL endFlag = NO; // 提前退出冒泡循环的标志位
-        for (NSUInteger j = 0; j < n - i - 1; j++) {
+        for (NSUInteger j = 0; j < n - i - 1; ++j) {
             if (sourceArray[j] > sourceArray[j+1]) {
                 // 交换
                 NSNumber *tmp = sourceArray[j];
@@ -119,11 +119,11 @@ void func() {
     NSMutableArray *sourceArray = [@[@3, @5, @4, @1, @2, @6] mutableCopy];
     NSUInteger n = sourceArray.count;
     
-    for (NSUInteger i = 1; i < n; i++) {
+    for (NSUInteger i = 1; i < n; ++i) {
         NSNumber *value = sourceArray[i];
         NSUInteger j = i - 1;
 
-        for (; j >= 0; j--) {
+        for (; j >= 0; --j) {
             if (sourceArray[j] > value) {
                 // 数据移动
                 sourceArray[j+1] = sourceArray[j];
@@ -136,10 +136,28 @@ void func() {
     }
 }
 
+- (int)approximateSquareRootByNum:(CGFloat)num min:(CGFloat)min max:(CGFloat)max {
+    CGFloat value = (min + max) / 2;
+    
+    if (value * value == num || (max - min) < 0.01) {
+        int approximateSquareRoot = (int)(max + 0.5);
+        return approximateSquareRoot;
+    } else if (value * value > num) {
+        max = value;
+    } else {
+        min = value;
+    }
+    
+    return [self approximateSquareRootByNum:num min:min max:max];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [self bubbleSort];
+    CGFloat num = 13;
+    CGFloat min = 1;
+    CGFloat max = num;
+    [self approximateSquareRootByNum:num min:min max:max];
     
     NSUInteger capacity = 6;
     [self initItems:capacity];
