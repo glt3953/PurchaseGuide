@@ -136,12 +136,16 @@ void func() {
     }
 }
 
-- (int)approximateSquareRootByNum:(CGFloat)num min:(CGFloat)min max:(CGFloat)max {
+// 求一个数的平方根
+- (CGFloat)approximateSquareRootByNum:(CGFloat)num min:(CGFloat)min max:(CGFloat)max {
     CGFloat value = (min + max) / 2;
     
-    if (value * value == num || (max - min) < 0.01) {
-        int approximateSquareRoot = (int)(max + 0.5);
-        return approximateSquareRoot;
+    if (value * value == num || (max - min) < 0.000001) {
+//        CGFloat approximateSquareRoot = (int)(max + 0.5);
+//        int n = 1000000;
+//        int tmp = (int)(value * n);
+//        value = (CGFloat)tmp / n;
+        return value;
     } else if (value * value > num) {
         max = value;
     } else {
@@ -193,12 +197,77 @@ void countingSort(int a[], int n) {
     }
 }
 
+// 二分查找
+int binarySearch(int a[], int n, int value) {
+    int low = 0;
+    int high = n - 1;
+    
+    while (low <= high) {
+        int mid = low + ((high - low) >> 1); // 如果 low 和 high 比较大的话，两者之和就有可能会溢出
+        
+        if (a[mid] > value) {
+            high = mid - 1;
+        } else {
+            if ((mid == n - 1) || (a[mid + 1] > value)) {
+                // 查找最后一个小于等于给定值的元素
+                return mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+//        if (a[mid] < value) {
+//            low = mid + 1;
+//        } else {
+//            if ((mid == 0) || (a[mid - 1] < value)) {
+//                // 查找第一个大于等于给定值的元素
+//                return mid;
+//            } else {
+//                high = mid - 1;
+//            }
+//        }
+        
+//        if (a[mid] > value) {
+//            high = mid - 1;
+//        } else if (a[mid] < value) {
+//            low = mid + 1;
+//        } else {
+//            if ((mid == n - 1) || (a[mid + 1] != value)) {
+//                // 查找最后一个值等于给定值的元素
+//                return mid;
+//            } else {
+//                low = mid + 1;
+//            }
+//
+////            if ((mid == 0) || (a[mid - 1] != value)) {
+////                // 查找第一个值等于给定值的元素
+////                return mid;
+////            } else {
+////                high = mid - 1;
+////            }
+//        }
+        
+//        if (a[mid] == value) {
+//            // 查找值等于给定值的元素
+//            return mid;
+//        } else if (a[mid] < value) {
+//            low = mid + 1;
+//        } else {
+//            high = mid - 1;
+//        }
+    }
+    
+    return -1;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    int n = 8;
-    int a[8] = {2, 5, 3, 0, 2, 3, 0, 3};
-    countingSort(a, n);
+    int n = 10;
+    int value = 8;
+    int a[] = {1, 3, 5, 8, 8, 8, 10, 13, 15, 20};
+    binarySearch(a, n, value);
+//    int a[8] = {2, 5, 3, 0, 2, 3, 0, 3};
+//    countingSort(a, n);
     
     CGFloat num = 13;
     CGFloat min = 1;
