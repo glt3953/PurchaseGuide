@@ -259,13 +259,93 @@ int binarySearch(int a[], int n, int value) {
     return -1;
 }
 
+void getReword(long totalReward, long *result) {
+    if (totalReward == 0) {
+        for (int i = 0; i < sizeof(result) / sizeof(result[0]); i++) {
+            printf("%ld\n", result[i]);
+        }
+        return;
+    } else if (totalReward < 0) {
+        return;
+    } else {
+        for (int i = 0; i < sizeof(result) / sizeof(result[0]); i++) {
+            long *newResult = nullptr;
+            memcpy(newResult, result, sizeof(result) / sizeof(result[0]) * sizeof(long));
+            getReword(totalReward - result[i], newResult);
+        }
+    }
+}
+
+- (void)getReward:(NSUInteger)totalReward result:(NSArray *)result {
+    static NSArray *rewards = @[@1, @2, @5, @10];
+    
+    if (totalReward == 0) {
+        for (NSUInteger i = 0; i < result.count; i++) {
+            NSLog(@"%@\n", result[i]);
+        }
+    } else if (totalReward > 0) {
+        for (NSUInteger i = 0; i < rewards.count; i++) {
+            NSMutableArray *newResult = [result mutableCopy];
+            [newResult addObject:rewards[i]];
+            [self getReward:totalReward - [rewards[i] unsignedIntegerValue] result:newResult];
+        }
+    }
+}
+
+//奇、偶数校验
+- (void)oddOrEven {
+    int odd_cnt = 0;
+    int even_cnt = 0;
+    long maxValue = 100000000;
+    NSTimeInterval startInterval = [NSDate timeIntervalSinceReferenceDate];
+    
+    //位运算
+    for (long i = 0; i < maxValue; i++) {
+        if ((i & 1) == 0) {
+            even_cnt++;
+        } else {
+            odd_cnt++;
+        }
+    }
+    
+    NSTimeInterval endInterval = [NSDate timeIntervalSinceReferenceDate];
+    NSLog(@"位运算耗时：%f", endInterval - startInterval);
+    NSLog(@"位运算的奇数：%d个，偶数：%d个", odd_cnt, even_cnt);
+    
+    odd_cnt = 0;
+    even_cnt = 0;
+    startInterval = [NSDate timeIntervalSinceReferenceDate];
+    
+    //模运算
+    for (long i = 0; i < maxValue; i++) {
+        if ((i % 2) == 0) {
+            even_cnt++;
+        } else {
+            odd_cnt++;
+        }
+    }
+    
+    endInterval = [NSDate timeIntervalSinceReferenceDate];
+    NSLog(@"模运算耗时：%f", endInterval - startInterval);
+    NSLog(@"模运算的奇数：%d个，偶数：%d个", odd_cnt, even_cnt);
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    int n = 10;
+    [self oddOrEven];
+    
+//    NSUInteger totalReward = 10;
+//    NSArray *result = @[@1, @2, @5, @10];
+//    [self getReward:totalReward result:result];
+    
+//    long totalReward = 10;
+//    long result[] = {1, 2, 5, 10};
+//    getReword(totalReward, result);
+    
     int value = 8;
     int a[] = {1, 3, 5, 8, 8, 8, 10, 13, 15, 20};
-    binarySearch(a, n, value);
+    binarySearch(a, sizeof(a) / sizeof(a[0]), value);
 //    int a[8] = {2, 5, 3, 0, 2, 3, 0, 3};
 //    countingSort(a, n);
     
