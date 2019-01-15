@@ -349,62 +349,62 @@ void getReword(long totalReward, long *result) {
 //    int a[8] = {2, 5, 3, 0, 2, 3, 0, 3};
 //    countingSort(a, n);
     
-    CGFloat num = 13;
-    CGFloat min = 1;
-    CGFloat max = num;
-    [self approximateSquareRootByNum:num min:min max:max];
-    
-    NSUInteger capacity = 6;
-    [self initItems:capacity];
-    for (NSUInteger i = 0; i < capacity; i++) {
-        [self enqueue:[NSString stringWithFormat:@"%lu", (unsigned long)i]];
-        
-        if (i % 2 == 0) {
-            NSString *item = [self dequeue];
-            NSLog(@"item:%@", item);
-        }
-    }
-    
-//    func();
-//    cal(5);
-    
-//    id __unsafe_unretained obj = [[NSObject alloc] init]; //编译报错（同weak修饰符）：Assigning retained object to unsafe_unretained variable; object will be released after assignment
-//    id __strong obj0 = [[NSObject alloc] init]; //自己生成并持有对象
-//    id __weak obj1 = obj0; //因为obj0变量为强引用，所以自己持有对象，这样obj1变量持有生成对象的弱引用
-    id __weak obj1 = nil;
-    {
-        id __strong obj0 = [[NSObject alloc] init]; //自己生成并持有对象
-        obj1 = obj0; //因为obj0变量为强引用，所以自己持有对象，obj1变量持有对象的弱引用
-        NSLog(@"obj1: %@", obj1); //输出obj1变量持有的弱引用的对象
-    } //因为obj0变量超出其作用域，强引用失效，所以自动释放自己持有的对象。因为该对象无持有者，所以废弃该对象，废弃对象的同时，持有该对象弱引用的obj1变量的弱引用失效，nil赋值给obj1。
-    NSLog(@"obj1: %@", obj1); //输出赋值给obj1变量中的nil（weak），若为unsafe_unretained，则运行报错
-    
-    {
-        char *dp = NULL;
-        /* ... */
-        {
-            char c = 'a';
-            dp = &c;
-            NSLog(@"dp: %s", dp);
-        } /* c falls out of scope */
-        NSLog(@"dp: %s", dp); //悬垂指针
-        /* dp is now a dangling pointer */
-    }
-    
-    {
-        char *dp;    /* dp is a wild pointer（野指针） */
-        static char *scp;  /* scp is not a wild pointer:
-                            * static variables are initialized to 0
-                            * at start and retain their values from
-                            * the last call afterwards.
-                            * Using this feature may be considered bad
-                            * style if not commented */
-    }
-    
-//    int i = 10;`
-//    arg = &i;
-    NSLog(@"第一次：*arg = %d", *arg);
-    NSLog(@"第二次：*arg = %d", *arg); //arg已经成为悬垂指针
+//    CGFloat num = 13;
+//    CGFloat min = 1;
+//    CGFloat max = num;
+//    [self approximateSquareRootByNum:num min:min max:max];
+//    
+//    NSUInteger capacity = 6;
+//    [self initItems:capacity];
+//    for (NSUInteger i = 0; i < capacity; i++) {
+//        [self enqueue:[NSString stringWithFormat:@"%lu", (unsigned long)i]];
+//        
+//        if (i % 2 == 0) {
+//            NSString *item = [self dequeue];
+//            NSLog(@"item:%@", item);
+//        }
+//    }
+//    
+////    func();
+////    cal(5);
+//    
+////    id __unsafe_unretained obj = [[NSObject alloc] init]; //编译报错（同weak修饰符）：Assigning retained object to unsafe_unretained variable; object will be released after assignment
+////    id __strong obj0 = [[NSObject alloc] init]; //自己生成并持有对象
+////    id __weak obj1 = obj0; //因为obj0变量为强引用，所以自己持有对象，这样obj1变量持有生成对象的弱引用
+//    id __weak obj1 = nil;
+//    {
+//        id __strong obj0 = [[NSObject alloc] init]; //自己生成并持有对象
+//        obj1 = obj0; //因为obj0变量为强引用，所以自己持有对象，obj1变量持有对象的弱引用
+//        NSLog(@"obj1: %@", obj1); //输出obj1变量持有的弱引用的对象
+//    } //因为obj0变量超出其作用域，强引用失效，所以自动释放自己持有的对象。因为该对象无持有者，所以废弃该对象，废弃对象的同时，持有该对象弱引用的obj1变量的弱引用失效，nil赋值给obj1。
+//    NSLog(@"obj1: %@", obj1); //输出赋值给obj1变量中的nil（weak），若为unsafe_unretained，则运行报错
+//    
+//    {
+//        char *dp = NULL;
+//        /* ... */
+//        {
+//            char c = 'a';
+//            dp = &c;
+//            NSLog(@"dp: %s", dp);
+//        } /* c falls out of scope */
+//        NSLog(@"dp: %s", dp); //悬垂指针
+//        /* dp is now a dangling pointer */
+//    }
+//    
+//    {
+//        char *dp;    /* dp is a wild pointer（野指针） */
+//        static char *scp;  /* scp is not a wild pointer:
+//                            * static variables are initialized to 0
+//                            * at start and retain their values from
+//                            * the last call afterwards.
+//                            * Using this feature may be considered bad
+//                            * style if not commented */
+//    }
+//    
+////    int i = 10;`
+////    arg = &i;
+//    NSLog(@"第一次：*arg = %d", *arg);
+//    NSLog(@"第二次：*arg = %d", *arg); //arg已经成为悬垂指针
 
 //    HttpServerViewController *defaultViewController = [[HttpServerViewController alloc] init];
     ViewController *defaultViewController = [[ViewController alloc] init];

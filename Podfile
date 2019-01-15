@@ -6,5 +6,6 @@ platform :ios, '9.0'
 target 'PurchaseGuide' do
 
 pod 'BEMCheckBox'
+pod 'AFNetworking'
 
 end

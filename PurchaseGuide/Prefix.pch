@@ -1,0 +1,39 @@
+//
+//  Prefix.pch
+//  room107
+//
+//  Created by ningxia on 15/6/18.
+//  Copyright (c) 2015年 107room. All rights reserved.
+//
+
+#ifndef room107_Prefix_pch
+#define room107_Prefix_pch
+
+#import <Availability.h>
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#endif
+
+#import "Macros.h"
+#import "AppClient.h"
+#import "Client.h"
+#import "Request.h"
+#import "CommonFuncs.h"
+#import "AppConfig.h"
+#import "Log.h"
+#import "OAuth2Token.h"
+#import "TimeUtil.h"
+#import "NotificationNames.h"
+#import "AppDelegate.h"
+#import "Util.h"
+#import "NSString+Valid.h"
+#import "Room107UserDefaults.h"
+#define App ((AppDelegate *)[UIApplication sharedApplication].delegate)
+
+#endif
