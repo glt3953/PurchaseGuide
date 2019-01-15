@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "HttpServerViewController.h"
 #import "ViewController.h"
+#import "NSURLSessionStudy.h"
 
 int *arg = NULL;
 
@@ -333,7 +334,8 @@ void getReword(long totalReward, long *result) {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [self oddOrEven];
+//    [self oddOrEven];
+    [[NSURLSessionStudy sharedInstance] getFunc];
     
 //    NSUInteger totalReward = 10;
 //    NSArray *result = @[@1, @2, @5, @10];
