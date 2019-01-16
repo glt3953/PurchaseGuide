@@ -86,6 +86,7 @@
 		0AE09F2821EE01EB00B1AA8F /* TimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE09F2621EE01EB00B1AA8F /* TimeUtil.m */; };
 		0AE09F2B21EE022000B1AA8F /* NotificationNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE09F2921EE021F00B1AA8F /* NotificationNames.m */; };
 		0AE09F3321EE0B8800B1AA8F /* NSURLSessionStudy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE09F3221EE0B8800B1AA8F /* NSURLSessionStudy.m */; };
+		0AE09F3621EE11CD00B1AA8F /* HttpsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE09F3521EE11CD00B1AA8F /* HttpsManager.m */; };
 		D857289FFF2863162FFCC00E /* libPods-PurchaseGuide.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7CD02FB19B54132DA23453 /* libPods-PurchaseGuide.a */; };
 		F36AB78D20EB14C00060C729 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F36AB78C20EB14C00060C729 /* AppDelegate.mm */; };
 		F36AB79020EB14C00060C729 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F36AB78F20EB14C00060C729 /* ViewController.m */; };
@@ -285,6 +286,8 @@
 		0AE09F2A21EE022000B1AA8F /* NotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationNames.h; sourceTree = "<group>"; };
 		0AE09F3121EE0B8800B1AA8F /* NSURLSessionStudy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSURLSessionStudy.h; sourceTree = "<group>"; };
 		0AE09F3221EE0B8800B1AA8F /* NSURLSessionStudy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSURLSessionStudy.m; sourceTree = "<group>"; };
+		0AE09F3421EE11CD00B1AA8F /* HttpsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpsManager.h; sourceTree = "<group>"; };
+		0AE09F3521EE11CD00B1AA8F /* HttpsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HttpsManager.m; sourceTree = "<group>"; };
 		7F5FCF711FAA7E9255635080 /* Pods-PurchaseGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PurchaseGuide.release.xcconfig"; path = "Pods/Target Support Files/Pods-PurchaseGuide/Pods-PurchaseGuide.release.xcconfig"; sourceTree = "<group>"; };
 		CE8097B82ED4356F35B0C556 /* Pods-PurchaseGuide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PurchaseGuide.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PurchaseGuide/Pods-PurchaseGuide.debug.xcconfig"; sourceTree = "<group>"; };
 		EE7CD02FB19B54132DA23453 /* libPods-PurchaseGuide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PurchaseGuide.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -604,6 +607,8 @@
 			children = (
 				0AE09F3121EE0B8800B1AA8F /* NSURLSessionStudy.h */,
 				0AE09F3221EE0B8800B1AA8F /* NSURLSessionStudy.m */,
+				0AE09F3421EE11CD00B1AA8F /* HttpsManager.h */,
+				0AE09F3521EE11CD00B1AA8F /* HttpsManager.m */,
 			);
 			path = NSURLSessionStudy;
 			sourceTree = "<group>";
@@ -930,6 +935,7 @@
 				F36AB7C420EB18420060C729 /* UIImage+NingXia.m in Sources */,
 				0AE09EDF21EDDFE500B1AA8F /* NSNumberFormatter+Additions.m in Sources */,
 				0A2745F021996DD500D4875C /* DDData.m in Sources */,
+				0AE09F3621EE11CD00B1AA8F /* HttpsManager.m in Sources */,
 				F36AB79B20EB14C00060C729 /* main.m in Sources */,
 				0AE09F1121EDFF8E00B1AA8F /* Room107UserDefaults.m in Sources */,
 				0AE09E9721EDCB9A00B1AA8F /* HTTPClient.m in Sources */,
