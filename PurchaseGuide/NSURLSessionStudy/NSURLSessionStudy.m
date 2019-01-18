@@ -60,7 +60,7 @@
     //GET请求，直接把请求参数跟在URL的后面以？隔开，多个参数之间以&符号拼接
     
     //1.确定请求路径
-    NSURL *url = [NSURL URLWithString:@"http://120.25.226.186:32812/login?username=520it&pwd=520it&type=JSON"];
+    NSURL *url = [NSURL URLWithString:@"https://www.58youcai.com//homepage/listNotice"];
     
     //2.创建请求对象
     //请求对象内部默认已经包含了请求头和请求方法（GET）
